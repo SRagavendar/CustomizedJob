@@ -11,7 +11,7 @@ import csv
 csv.register_dialect('escaped', escapechar='\\', doublequote=True, quoting=csv.QUOTE_ALL)
 sear=str(input("What type of job are you looking for?"))
 location=str(input("What location do you want to search around?"))
-my_url= f'https://www.indeed.co.in/jobs?q={sear.replace(" ", "+")}&l={location.replace(" ", "+")}'
+indeedurl= f'https://www.indeed.co.in/jobs?q={sear.replace(" ", "+")}&l={location.replace(" ", "+")}'
 monsterurl=f'https://www.monsterindia.com/srp/results?sort=1&limit=100&query={sear.replace(" ", "%20")}&locations={location.replace(" ", "+")}'
 naukriurl= f'https://www.naukri.com/{sear.replace(" ", "-")}-jobs-in-{location.replace(" ", "+")}'
 filename = f"{sear} jobs in {location}.csv"
@@ -22,9 +22,9 @@ with open(filename, "w", newline='') as myfile:
     spamWriter = csv.writer(myfile, dialect='excel')
     spamWriter.writerow(["Job Title","Company","Location","Salary","Link"])
 
-    myurll=[my_url,my_url+"&start=10",my_url+"&start=20"]
-    for my_url in myurll:
-        uClient = uReq(my_url)
+    myurll=[indeedurl,indeedurl+"&start=10",indeedurl+"&start=20"]
+    for indeedurl in myurll:
+        uClient = uReq(indeedurl)
         page = uClient.read()
         uClient.close()
         page_soup = soup(page, "lxml")

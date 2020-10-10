@@ -3,17 +3,17 @@ from scripts.web import display_textbox_question, display_radiobuttons_question,
     construct_container, get_question_types, get_question_type_funcs
 
 connection_to_db = sqlite3.connect("questions__answers_db.db")
-
 cursor = connection_to_db.cursor()
-
 initial_load_query = """SELECT * FROM data WHERE answer IS NULL;"""
-
-data_tupperware = construct_container()
+data_container = construct_container()
 
 def print_welcome():
-    print("\r# Hi! This is where you will answer questions scrapped from py_indeed.py.\n",
-          "\r# Close the pop-up window or click 'Cancel' when finished or want to quit.\n",
-
+    print(
+        '####################################################################\n',
+        "\r# Hi! This is where you will answer questions scrapped from py_indeed.py.\n",
+        "\r# Close the pop-up window or click 'Cancel' when finished or want to quit.\n",
+        "\r# Author: Conner Crosby\n",
+        '\r####################################################################')
     input("# Press Enter To Begin...\n")
 
 def can_query(query):
@@ -41,7 +41,7 @@ def quit(answer):
         return True
 
 def main():
-    known_types = get_question_types(data_tupperware)
+    known_types = get_question_types(data_container)
     print_welcome()
     if (not can_query(initial_load_query)):
         print("Error! If database (db) file does not exist, then run py_indeed first...")
@@ -50,7 +50,7 @@ def main():
         db_rows = cursor.fetchall()
         for db_row in db_rows:
             question, question_type, question_choices = load_into(db_row)
-            funcs = get_question_type_funcs(data_tupperware, question_type)
+            funcs = get_question_type_funcs(data_container, question_type)
             answer = display_question(question, funcs["print_question"], question_choices)
             if(quit(answer)):
                 break

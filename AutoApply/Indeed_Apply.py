@@ -11,12 +11,8 @@ initial_load_query = """SELECT * FROM data WHERE answer IS NULL;"""
 data_tupperware = construct_container()
 
 def print_welcome():
-    print(
-        '####################################################################\n',
-        "\r# Hi! This is where you will answer questions scrapped from py_indeed.py.\n",
-        "\r# Close the pop-up window or click 'Cancel' when finished or want to quit.\n",
-        "\r# Author: Conner Crosby\n",
-        '\r####################################################################')
+    print("\r# Hi! This is where you will answer questions scrapped from py_indeed.py.\n",
+          "\r# Close the pop-up window or click 'Cancel' when finished or want to quit.\n",
 
     input("# Press Enter To Begin...\n")
 
